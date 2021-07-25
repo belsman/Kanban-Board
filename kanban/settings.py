@@ -78,9 +78,11 @@ WSGI_APPLICATION = 'kanban.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Kanban_Board_Development',
+        'NAME': 'kanban',
         'USER': 'belsman',
-        'PASSWORD': 'password'
+        'PASSWORD': 'password',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
     }
 }
 
