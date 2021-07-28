@@ -32,7 +32,6 @@ class Task(models.Model):
     order = models.SmallIntegerField(default=0)
     started = models.DateTimeField(blank=True, null=True)
     completed = models.DateTimeField(blank=True, null=True)
-    # points = models.PositiveIntegerField()
 
     def __str__(self):
         return self.title

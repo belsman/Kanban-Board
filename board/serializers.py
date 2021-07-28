@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from board.models import Board, List, Task
 
+
 class BoardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Board
@@ -9,11 +10,11 @@ class BoardSerializer(serializers.ModelSerializer):
 
 class ListSerializer(serializers.ModelSerializer):
     class Meta:
-        models = List
-        fields = ['id', 'name', 'board']
+        model = List
+        fields = ['id', 'name', 'order', 'board']
 
 
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
-        models = Task
+        model = Task
         fields = ['id', 'title', 'description', 'board', 'list', 'order', 'started', 'completed']
