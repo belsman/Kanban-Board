@@ -16,7 +16,7 @@ class List(models.Model):
 
     name = models.CharField(max_length=100)
     order = models.SmallIntegerField(default=0)
-    board = models.ForeignKey(Board, on_delete=models.CASCADE)
+    board = models.ForeignKey(Board, related_name='lists', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -27,8 +27,8 @@ class Task(models.Model):
 
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, default='')
-    board = models.ForeignKey(Board, on_delete=models.CASCADE)
-    list = models.ForeignKey(List, blank=True, null=True, on_delete=models.CASCADE)
+    board = models.ForeignKey(Board, related_name='tasks', on_delete=models.CASCADE)
+    list = models.ForeignKey(List, related_name='tasks', blank=True, null=True, on_delete=models.CASCADE)
     order = models.SmallIntegerField(default=0)
     started = models.DateTimeField(blank=True, null=True)
     completed = models.DateTimeField(blank=True, null=True)
