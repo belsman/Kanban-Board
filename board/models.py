@@ -29,11 +29,10 @@ class Task(models.Model):
     description = models.TextField(blank=True, default='')
     board = models.ForeignKey(Board, on_delete=models.CASCADE)
     list = models.ForeignKey(List, blank=True, null=True, on_delete=models.CASCADE)
-    is_backlog = models.BooleanField()
     order = models.SmallIntegerField(default=0)
     started = models.DateTimeField(blank=True, null=True)
     completed = models.DateTimeField(blank=True, null=True)
-    points = models.PositiveIntegerField()
+    # points = models.PositiveIntegerField()
 
     def __str__(self):
         return self.title
