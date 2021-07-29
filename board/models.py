@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Board(models.Model):
-    """Board for managing task"""
+    """Kanban board for managing tasks"""
 
     name = models.CharField(max_length=100)
     description = models.TextField(blank='', default='')
@@ -12,7 +12,7 @@ class Board(models.Model):
 
 
 class List(models.Model):
-    """A current state of the task. (To-Do, In-Prgress, Done) etc.""" 
+    """Current state of the task. (Backlog, To-Do, In-Prgress, Done) etc.""" 
 
     name = models.CharField(max_length=100)
     order = models.SmallIntegerField(default=0)
