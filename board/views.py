@@ -1,7 +1,7 @@
 from rest_framework import generics
 from rest_framework import mixins
-from board.models import Board, List
-from board.serializers import BoardSerializer, ListSerializer
+from board.models import Board, List, Task
+from board.serializers import BoardSerializer, ListSerializer, TaskSerializer
 
 
 class BoardList(generics.ListCreateAPIView):
@@ -10,7 +10,6 @@ class BoardList(generics.ListCreateAPIView):
 
 
 class BoardDetail(generics.RetrieveUpdateDestroyAPIView):
-
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
 
@@ -23,3 +22,13 @@ class ListCreation(generics.CreateAPIView):
 class ListDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = List.objects.all()
     serializer_class = ListSerializer
+
+
+class TaskCreation(generics.CreateAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+
+class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
