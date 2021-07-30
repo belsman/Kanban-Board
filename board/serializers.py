@@ -20,3 +20,9 @@ class BoardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Board
         fields = ['id', 'name', 'description', 'lists']
+
+    def create(self, validated_data):
+        board = Board.objects.create(**validated_data)
+        for list_name in ['TO-DO', 'DOING', 'DONE']:
+            List.objects.create(board=board, name=list_name)
+        return board
