@@ -4,10 +4,10 @@ from board.models import Board, List, Task
 
 class TaskSerializer(serializers.ModelSerializer):
     creator = serializers.ReadOnlyField(source='creator.username')
-    
+
     class Meta:
         model = Task
-        fields = ['id', 'title', 'description', 'board', 'list', 'order', 'started', 'completed', 'creator']
+        fields = ['id', 'title', 'description', 'assigned', 'board', 'list', 'order', 'started', 'completed', 'creator']
 
 
 class ListSerializer(serializers.ModelSerializer):
