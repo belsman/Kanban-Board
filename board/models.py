@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 
@@ -6,6 +7,7 @@ class Board(models.Model):
 
     name = models.CharField(max_length=100)
     description = models.TextField(blank='', default='')
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, related_name='created_boards', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -17,6 +19,7 @@ class List(models.Model):
     name = models.CharField(max_length=100)
     order = models.SmallIntegerField(default=0)
     board = models.ForeignKey(Board, related_name='lists', on_delete=models.CASCADE)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, related_name='created_lists', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -32,6 +35,8 @@ class Task(models.Model):
     order = models.SmallIntegerField(default=0)
     started = models.DateTimeField(blank=True, null=True)
     completed = models.DateTimeField(blank=True, null=True)
+    assigned = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='assigned_tasks', null=True, blank=True, on_delete=models.CASCADE)
+    creator = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='created_tasks', null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
