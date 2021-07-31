@@ -1,9 +1,13 @@
 from rest_framework import generics
+from rest_framework import permissions
 from board.models import Board, List, Task
 from board.serializers import BoardSerializer, ListSerializer, TaskSerializer
 
+class DefaultMixin:
+    permission_classes = [permissions.IsAuthenticated]
 
-class BoardList(generics.ListCreateAPIView):
+
+class BoardList(DefaultMixin, generics.ListCreateAPIView):
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
 
@@ -11,12 +15,12 @@ class BoardList(generics.ListCreateAPIView):
         serializer.save(creator=self.request.user)
 
 
-class BoardDetail(generics.RetrieveUpdateDestroyAPIView):
+class BoardDetail(DefaultMixin, generics.RetrieveUpdateDestroyAPIView):
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
 
 
-class ListCreation(generics.CreateAPIView):
+class ListCreation(DefaultMixin, generics.CreateAPIView):
     queryset = List.objects.all()
     serializer_class = ListSerializer
 
@@ -24,12 +28,12 @@ class ListCreation(generics.CreateAPIView):
         serializer.save(creator=self.request.user)
 
 
-class ListDetail(generics.RetrieveUpdateDestroyAPIView):
+class ListDetail(DefaultMixin, generics.RetrieveUpdateDestroyAPIView):
     queryset = List.objects.all()
     serializer_class = ListSerializer
 
 
-class TaskCreation(generics.CreateAPIView):
+class TaskCreation(DefaultMixin, generics.CreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
@@ -37,6 +41,6 @@ class TaskCreation(generics.CreateAPIView):
         serializer.save(creator=self.request.user)
 
 
-class TaskDetail(generics.RetrieveUpdateDestroyAPIView):
+class TaskDetail(DefaultMixin, generics.RetrieveUpdateDestroyAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer

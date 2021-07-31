@@ -30,5 +30,5 @@ class BoardSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         board = Board.objects.create(**validated_data)
         for list_name in ['TO-DO', 'DOING', 'DONE']:
-            List.objects.create(board=board, name=list_name)
+            List.objects.create(board=board, name=list_name, creator=board.creator)
         return board
