@@ -1,6 +1,7 @@
 from rest_framework import generics
 from rest_framework import permissions
 from board.models import Board, List, Task
+from board.permissions import IsBoardCreator
 from board.serializers import BoardSerializer, ListSerializer, TaskSerializer
 
 class DefaultMixin:
@@ -16,6 +17,7 @@ class BoardList(DefaultMixin, generics.ListCreateAPIView):
 
 
 class BoardDetail(DefaultMixin, generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsBoardCreator]
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
 
