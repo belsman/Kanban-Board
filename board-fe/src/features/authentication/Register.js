@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 
 function Register() {
+
+    const [ username, setUsername ] = useState("");
+    const [ email, setEmail ] = useState("");
+    const [ password, setPassword ] = useState("");
+    const [ confirmPassword, setConfirmPassword ] = useState("");
 
     const history = useHistory();
 
@@ -15,18 +20,22 @@ function Register() {
       <form>
         <div>
           <input name="username" type="text"
-            value={''} placeholder="Username" required />
+            onChange={(e) => setUsername(e.target.value)}
+            value={username} placeholder="Username" required />
         </div>
         <div>
           <input name="email" type="email"
-            value={''} placeholder="Email" required />
+            onChange={(e) => setEmail(e.target.value)}
+            value={email} placeholder="Email" required />
         </div>
         <div>
-          <input name="password" type="password" value={''}
+          <input name="password" type="password" value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Password" required />
         </div>
         <div>
-          <input name="confirmPassword" type="password" value={''}
+          <input name="confirmPassword" type="password" value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Password" required />
         </div>
         <div>

@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
 function Login() {
+
+  const [ username, setUsername ] = useState("");
+  const [ password, setPassword ] = useState("");
 
   const history = useHistory();
 
@@ -14,10 +17,12 @@ function Login() {
       <form>
         <div>
           <input name="username" type="text"
-            value={''} placeholder="Username" required />
+            onChange={(e) => {setUsername(e.target.value)}}
+            value={username} placeholder="Username" required />
         </div>
         <div>
-          <input name="password" type="password" value={''}
+          <input name="password" type="password" value={password}
+            onChange={(e) => {setPassword(e.target.value)}}
             placeholder="Password" required />
         </div>
         <div>
