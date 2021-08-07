@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
-
-function Register() {
+function Register({ setToggle }) {
 
     const [ username, setUsername ] = useState("");
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ confirmPassword, setConfirmPassword ] = useState("");
 
-    const history = useHistory();
-
     return (
     <>
       <div>
         <p>Need to login?</p>
-        <button onClick={() => history.push('/login')}>Login</button>
+        <button onClick={() => setToggle(true)}>Login</button>
       </div>
       <form>
         <div>

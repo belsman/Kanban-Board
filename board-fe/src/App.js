@@ -4,15 +4,15 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './features/authentication/Login';
 import Register from './features/authentication/Register';
 import Board from './features/board/Board';
+import Home from './components/Home';
+import AuthPage from './features/authentication/AuthPage';
 
 function App() {
   return (
     <div>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/" component={Board} />
+          <Route exact path="/" component={AuthPage} />
         </Switch>
       </BrowserRouter>
     </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
-function Login() {
+function Login({ setToggle }) {
 
   const [ username, setUsername ] = useState("");
   const [ password, setPassword ] = useState("");
@@ -12,7 +12,7 @@ function Login() {
     <>
       <div>
         <p>Need to register?</p>
-        <button onClick={() => history.push('/register')}>Register</button>
+        <button onClick={() => setToggle(false)}>Register</button>
       </div>
       <form>
         <div>
