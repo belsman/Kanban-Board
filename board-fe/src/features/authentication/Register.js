@@ -32,10 +32,10 @@ function Register({ setToggle }) {
         <div>
           <input name="confirmPassword" type="password" value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="Password" required />
+            placeholder="Confirm Password" required />
         </div>
         <div>
-            <button>Login</button>
+            <button>Register</button>
         </div>
       </form>
     </>
