@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from "axios";
 
 const initialState = {
   token: null,
@@ -7,40 +8,37 @@ const initialState = {
 
 export const loginThunk = createAsyncThunk(
   'authentication/logIn',
-  async (amount) => {
-    const response = await fetchCount(amount);
-    // The value we return becomes the `fulfilled` action payload
-    return response.data;
+  async (credentials) => {
+    const { token } = await axios.post("http://localhost:8000/api-token-auth/", credentials);
+    return token;
   }
 );
 
-export const registerThunk = createAsyncThunk(
-  'authentication/register',
-  async (amount) => {
-    const response = await fetchCount(amount);
-    // The value we return becomes the `fulfilled` action payload
-    return response.data;
-  }
-);
+// export const registerThunk = createAsyncThunk(
+//   'authentication/register',
+//   async (credentials) => {
+//     const { token } = await axios.post("api-token-auth/", credentials);
+//     return response.data;
+//   }
+// );
 
 export const authenticationSlice = createSlice({
   name: 'authentication',
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(incrementAsync.pending, (state) => {
+      .addCase(loginThunk.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(incrementAsync.fulfilled, (state, action) => {
+      .addCase(loginThunk.fulfilled, (state, action) => {
+        console.log(state, action);
         state.status = 'idle';
-        state.value += action.payload;
+        state.token = action.payload;
       });
   },
 });
 
-export const { registerThunk, loginThunk } = counterSlice.actions;
-
 export const selectToken = (state) => state.authentication.token;
 
 
-export default counterSlice.reducer;
+export default authenticationSlice.reducer;

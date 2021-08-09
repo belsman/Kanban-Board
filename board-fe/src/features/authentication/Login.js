@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { loginThunk } from './AuthenticationSlice';
 
 function Login({ setToggle }) {
+
+  const dispatch = useDispatch();
 
   const [ username, setUsername ] = useState("");
   const [ password, setPassword ] = useState("");
 
-  const history = useHistory();
+  const handleSubmit = e => {
+    e.preventDefault();
+    console.log("...submitting to the server");
+    dispatch(loginThunk({ username, password }));
+  };
 
   return (
     <>
@@ -14,7 +21,7 @@ function Login({ setToggle }) {
         <p>Need to register?</p>
         <button onClick={() => setToggle(false)}>Register</button>
       </div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <input name="username" type="text"
             onChange={(e) => {setUsername(e.target.value)}}
