@@ -8,7 +8,7 @@ const initialState = {
 };
 
 export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
-  const { data } = await axios.get("/auth/user");
+  const { data } = await axios.get("http://localhost:8000/auth-user");
   return data;
 });
 
@@ -25,7 +25,7 @@ export const userSlice = createSlice({
       state.user = action.payload;
     },
     [fetchUser.rejected]: (state, action) => {
-      action.status = 'failure';
+      state.status = 'failure';
       state.error = action.error.message;
     }
   }
