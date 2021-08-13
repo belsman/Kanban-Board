@@ -1,8 +1,13 @@
+from django.http.response import JsonResponse
 from rest_framework import generics
 from rest_framework import permissions
 from board.models import Board, List, Task
 from board.permissions import IsBoardCreator
 from board.serializers import BoardSerializer, ListSerializer, TaskSerializer
+
+
+def auth_user(request):
+    return JsonResponse({'id': 1, 'username': 'test user'})
 
 class DefaultMixin:
     permission_classes = [permissions.IsAuthenticated]

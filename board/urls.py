@@ -11,6 +11,8 @@ urlpatterns = [
 
     path('tasks/', views.TaskCreation.as_view()),
     path('tasks/<int:pk>/', views.TaskDetail.as_view()),
+
+    path('auth-user', views.auth_user),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
