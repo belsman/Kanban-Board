@@ -1,17 +1,15 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Login from './features/authentication/Login';
-import Register from './features/authentication/Register';
-import Board from './features/board/Board';
 import Home from './components/Home';
 import AuthPage from './features/authentication/AuthPage';
+import { useSelector } from 'react-redux';
 
 function App() {
-  const token = null;
+  const user = useSelector(state => state.user);
   
-  if(!token) {
-    return <AuthPage /> 
+  if(!user.id) {
+    return <AuthPage />
   }
     
   return (
