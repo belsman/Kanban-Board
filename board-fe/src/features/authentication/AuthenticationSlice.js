@@ -2,8 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from "axios";
 
 const initialState = {
-  token: null,
-  status: 'idle',
+  sessionToken: '',
 };
 
 export const loginThunk = createAsyncThunk(
@@ -31,7 +30,6 @@ export const authenticationSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(loginThunk.fulfilled, (state, action) => {
-        console.log(state, action);
         state.status = 'idle';
         state.token = action.payload;
       });
