@@ -1,6 +1,9 @@
 from rest_framework import serializers
 from board.models import Board, List, Card
 
+# class RegistrationSerializer(serializers.ModelSerializer):
+#     pass
+
 
 class CardSerializer(serializers.ModelSerializer):
     creator = serializers.ReadOnlyField(source='creator.username')
