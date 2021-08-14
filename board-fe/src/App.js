@@ -6,15 +6,8 @@ import AuthPage from './features/authentication/AuthPage';
 import { useSelector } from 'react-redux';
 
 function App() {
-  const userStatus = useSelector(state => state.user.status);
-  const userErrorMessage = useSelector(state => state.user.error);
-  const user = useSelector(state => state.user.user);
-
-  if(userStatus === 'failure') {
-    return <h3>{userErrorMessage}</h3>;
-  }
-
-  if (!user?.id) {
+  
+  if (!token) {
     return <AuthPage />
   }
   
