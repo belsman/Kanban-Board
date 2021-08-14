@@ -2,9 +2,9 @@ from django.http.response import JsonResponse
 from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework import permissions
-from board.models import Board, List, Task
+from board.models import Board, List, Card
 from board.permissions import IsBoardCreator
-from board.serializers import BoardSerializer, ListSerializer, TaskSerializer
+from board.serializers import BoardSerializer, ListSerializer, CardSerializer
 
 
 class BoardViewSet(viewsets.ModelViewSet):
@@ -26,10 +26,10 @@ class ListViewSet(viewsets.ModelViewSet):
         serializer.save(creator=self.request.user)
 
 
-class TaskViewSet(viewsets.ModelViewSet):
+class CardViewSet(viewsets.ModelViewSet):
     """Provides 'create', 'partial_update', 'destroy' 'retrieve' actions."""
-    queryset = Task.objects.all()
-    serializer_class = TaskSerializer
+    queryset = Card.objects.all()
+    serializer_class = CardSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):

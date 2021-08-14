@@ -1,22 +1,22 @@
 from rest_framework import serializers
-from board.models import Board, List, Task
+from board.models import Board, List, Card
 
 
-class TaskSerializer(serializers.ModelSerializer):
+class CardSerializer(serializers.ModelSerializer):
     creator = serializers.ReadOnlyField(source='creator.username')
 
     class Meta:
-        model = Task
+        model = Card
         fields = ['id', 'title', 'description', 'assigned', 'board', 'list', 'order', 'started', 'completed', 'creator']
 
 
 class ListSerializer(serializers.ModelSerializer):
     creator = serializers.ReadOnlyField(source='creator.username')
-    tasks = TaskSerializer(many=True, read_only=True)
+    cards = CardSerializer(many=True, read_only=True)
 
     class Meta:
         model = List
-        fields = ['id', 'name', 'order', 'creator', 'board',  'tasks']
+        fields = ['id', 'name', 'order', 'creator', 'board',  'cards']
 
 
 class BoardSerializer(serializers.ModelSerializer):
@@ -29,6 +29,6 @@ class BoardSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         board = Board.objects.create(**validated_data)
-        for list_name in ['TO-DO', 'DOING', 'DONE']:
+        for list_name in ['to-do', 'doing', 'done']:
             List.objects.create(board=board, name=list_name, creator=board.creator)
         return board
