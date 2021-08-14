@@ -1,5 +1,6 @@
 from django.http.response import JsonResponse
 from rest_framework import generics
+from rest_framework import viewsets
 from rest_framework import permissions
 from board.models import Board, List, Task
 from board.permissions import IsBoardCreator
@@ -12,19 +13,13 @@ def auth_user(request):
 class DefaultMixin:
     permission_classes = [permissions.IsAuthenticated]
 
-
-class BoardList(DefaultMixin, generics.ListCreateAPIView):
+class BoardViewSet(viewsets.ModelViewSet):
     queryset = Board.objects.all()
     serializer_class = BoardSerializer
+    permission_classes = [permissions.IsAuthenticated, IsBoardCreator]
 
     def perform_create(self, serializer):
         serializer.save(creator=self.request.user)
-
-
-class BoardDetail(DefaultMixin, generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsBoardCreator]
-    queryset = Board.objects.all()
-    serializer_class = BoardSerializer
 
 
 class ListCreation(DefaultMixin, generics.CreateAPIView):
