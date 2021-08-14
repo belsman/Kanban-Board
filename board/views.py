@@ -26,7 +26,7 @@ class ListViewSet(viewsets.ModelViewSet):
         serializer.save(creator=self.request.user)
 
 
-class TaskCreation(viewsets.ModelViewSet):
+class TaskViewSet(viewsets.ModelViewSet):
     """Provides 'create', 'partial_update', 'destroy' 'retrieve' actions."""
     queryset = Task.objects.all()
     serializer_class = TaskSerializer

@@ -1,18 +1,13 @@
-from django.urls import path
-from rest_framework.urlpatterns import format_suffix_patterns
-from board import views
+from django.db import router
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from board.views import BoardViewSet, ListViewSet, TaskViewSet
+
+router = DefaultRouter()
+router.register(r'boards', BoardViewSet)
+router.register(r'lists', ListViewSet)
+router.register(r'tasks', TaskViewSet)
 
 urlpatterns = [
-    path('boards/', views.BoardList.as_view()),
-    path('boards/<int:pk>/', views.BoardDetail.as_view()),
-
-    path('lists/', views.ListCreation.as_view()),
-    path('lists/<int:pk>/', views.ListDetail.as_view()),
-
-    path('tasks/', views.TaskCreation.as_view()),
-    path('tasks/<int:pk>/', views.TaskDetail.as_view()),
-
-    path('auth-user', views.auth_user),
+    path('', include(router.urls))
 ]
-
-urlpatterns = format_suffix_patterns(urlpatterns)
