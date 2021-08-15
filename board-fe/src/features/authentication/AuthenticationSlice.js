@@ -10,7 +10,7 @@ const initialState = {
 const appToken = localStorage.getItem('kanban-board-by-bello');
 
 export const fetchUser = createAsyncThunk(
-  'authentication/fetchUser',
+  'auth/fetchUser',
   async () => {
     const response = await axios.get(
       "http://localhost:8000/auth-user/", {
@@ -25,7 +25,7 @@ export const fetchUser = createAsyncThunk(
 );
 
 export const login = createAsyncThunk(
-  'authentication/logIn',
+  'auth/logIn',
   async (credentials) => {
     const response = await axios.post("http://localhost:8000/login/", credentials);
     const data = await response.data;
@@ -34,8 +34,13 @@ export const login = createAsyncThunk(
   }
 );
 
-export const authenticationSlice = createSlice({
-  name: 'authentication',
+export const logout = createAsyncThunk(
+  'auth/logOut',
+  async () => localStorage.removeItem("kanban-board-by-bello")
+);
+
+export const authSlice = createSlice({
+  name: 'auth',
   initialState,
   extraReducers: (builder) => {
     builder
@@ -56,4 +61,4 @@ export const authenticationSlice = createSlice({
   },
 });
 
-export default authenticationSlice.reducer;
+export default authSlice.reducer;
