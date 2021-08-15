@@ -7,18 +7,16 @@ const initialState = {
   error: null,
 };
 
-const appToken = localStorage.getItem('kanban-board-by-bello');
+axios.interceptors.request.use(async function (config) {
+  const appToken = localStorage.getItem('kanban-board-by-bello');
+  config.headers["Authorization"] =  Boolean(appToken) && `Token ${appToken}`;
+  return config;
+});
 
 export const fetchUser = createAsyncThunk(
   'auth/fetchUser',
   async () => {
-    const response = await axios.get(
-      "http://localhost:8000/auth-user/", {
-        headers: {
-          authorization: `Token ${appToken}`,
-        }
-      }
-    );
+    const response = await axios.get("http://localhost:8000/auth-user/");
     const data = await response.data;
     return data;
   }
