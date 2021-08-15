@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginThunk } from './AuthenticationSlice';
+import { login } from './AuthenticationSlice';
 
 function Login({ setToggle }) {
 
@@ -12,7 +12,7 @@ function Login({ setToggle }) {
   const handleSubmit = e => {
     e.preventDefault();
     console.log("...submitting to the server");
-    dispatch(loginThunk({ username, password }));
+    dispatch(login({ username, password }));
   };
 
   return (

@@ -3,6 +3,8 @@ import axios from "axios";
 
 const initialState = {
   user: {},
+  status: 'idle',
+  error: null,
 };
 
 export const fetchUser = createAsyncThunk(
@@ -26,13 +28,17 @@ export const authenticationSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(loginThunk.pending, (state) => {
+      .addCase(fetchUser.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(loginThunk.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.token = action.payload;
-      });
+      .addCase(fetchUser.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.user = action.payload;
+      })
+      .addCase(fetchUser.rejected, (state, action) => {
+        state.status = 'failure';
+        state.error = action.error;
+      })
   },
 });
 

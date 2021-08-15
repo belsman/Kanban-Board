@@ -17,7 +17,7 @@ class ObtainAuthUser(APIView):
             if request.auth:
                 data['token'] = request.auth.key
         return Response(data)
-
+        
 
 class BoardViewSet(viewsets.ModelViewSet):
     queryset = Board.objects.all()
