@@ -6,9 +6,9 @@ import AuthPage from './features/authentication/AuthPage';
 import { useSelector } from 'react-redux';
 
 function App() {
-  const token = useSelector(state => state.auth.token);
+  const user = useSelector(state => state.auth.user);
 
-  if (!token) {
+  if (!user.id) {
     return <AuthPage />
   }
   
