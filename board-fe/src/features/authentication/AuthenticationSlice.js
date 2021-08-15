@@ -7,6 +7,8 @@ const initialState = {
   error: null,
 };
 
+// get token from storage and add it to the interceptor
+
 export const fetchUser = createAsyncThunk(
   'authentication/fetchUser',
   async () => {
@@ -20,6 +22,7 @@ export const login = createAsyncThunk(
   async (credentials) => {
     const response = await axios.post("http://localhost:8000/login/", credentials);
     const data = await response.data;
+    // store our toke in the localstorage
     return data;
   }
 );
@@ -38,7 +41,7 @@ export const authenticationSlice = createSlice({
       })
       .addCase(fetchUser.rejected, (state, action) => {
         state.fetchedUserStatus = 'failure';
-        state.error = action.error;
+        state.user = {};
       })
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload;
