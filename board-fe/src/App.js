@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 function App() {
   const user = useSelector(state => state.auth.user);
 
-  if (!user.id) {
+  if (!user.user_id) {
     return <AuthPage />
   }
   
