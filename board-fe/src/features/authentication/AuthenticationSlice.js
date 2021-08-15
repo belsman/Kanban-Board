@@ -7,12 +7,19 @@ const initialState = {
   error: null,
 };
 
-// get token from storage and add it to the interceptor
+const appToken = localStorage.getItem('kanban-board-by-bello');
 
 export const fetchUser = createAsyncThunk(
   'authentication/fetchUser',
   async () => {
-    const { data } = await axios.get("http://localhost:8000/auth-user/");
+    const response = await axios.get(
+      "http://localhost:8000/auth-user/", {
+        headers: {
+          authorization: `Token ${appToken}`,
+        }
+      }
+    );
+    const data = await response.data;
     return data;
   }
 );
@@ -22,7 +29,7 @@ export const login = createAsyncThunk(
   async (credentials) => {
     const response = await axios.post("http://localhost:8000/login/", credentials);
     const data = await response.data;
-    // store our toke in the localstorage
+    localStorage.setItem("kanban-board-by-bello", data.token);
     return data;
   }
 );
