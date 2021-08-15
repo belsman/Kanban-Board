@@ -1,10 +1,22 @@
-from django.http.response import JsonResponse
-from rest_framework import generics
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from board.models import Board, List, Card
 from board.permissions import IsBoardCreator
 from board.serializers import BoardSerializer, ListSerializer, CardSerializer
+
+
+class ObtainAuthUser(APIView):
+    def get(self, request, format=None):
+        data = {}
+        user = request.user
+        if user.is_authenticated:
+            data['id'] = user.id
+            data['username'] = user.username
+            if request.auth:
+                data['token'] = request.auth.key
+        return Response(data)
 
 
 class BoardViewSet(viewsets.ModelViewSet):

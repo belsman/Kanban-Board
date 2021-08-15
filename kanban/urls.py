@@ -18,7 +18,7 @@ from rest_framework.authtoken import views
 
 urlpatterns = [
     path('', include('board.urls')),
-    path('api-token-auth/', views.obtain_auth_token)
+    path('login/', views.obtain_auth_token)
 ]
 
 urlpatterns += [
