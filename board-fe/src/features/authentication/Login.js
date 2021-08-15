@@ -11,7 +11,6 @@ function Login({ setToggle }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log("...submitting to the server");
     dispatch(login({ username, password }));
   };
 

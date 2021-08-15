@@ -3,12 +3,12 @@ import axios from "axios";
 
 const initialState = {
   user: {},
-  status: 'idle',
+  fetchedUserStatus: 'idle',
   error: null,
 };
 
 export const fetchUser = createAsyncThunk(
-  'authentication/logIn',
+  'authentication/fetchUser',
   async () => {
     const { data } = await axios.get("http://localhost:8000/auth-user/");
     return data;
@@ -18,7 +18,8 @@ export const fetchUser = createAsyncThunk(
 export const login = createAsyncThunk(
   'authentication/logIn',
   async (credentials) => {
-    const { data } = await axios.post("http://localhost:8000/login/", credentials);
+    const response = await axios.post("http://localhost:8000/login/", credentials);
+    const data = await response.data;
     return data;
   }
 );
@@ -29,15 +30,18 @@ export const authenticationSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchUser.pending, (state) => {
-        state.status = 'loading';
+        state.fetchedUserStatus = 'loading';
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.fetchedUserStatus = 'succeeded';
         state.user = action.payload;
       })
       .addCase(fetchUser.rejected, (state, action) => {
-        state.status = 'failure';
+        state.fetchedUserStatus = 'failure';
         state.error = action.error;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.user = action.payload;
       })
   },
 });
