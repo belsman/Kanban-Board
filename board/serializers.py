@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.conf import settings
 from rest_framework import serializers
 from board.models import Board, List, Card
 
@@ -7,7 +7,7 @@ class UserSerializer(serializers.ModelSerializer):
     token = serializers.CharField(read_only=True, source='auth_token')
 
     class Meta:
-        model = User
+        model = settings.AUTH_USER_MODEL
         fields = ['id', 'username', 'email', 'password', 'token']
 
 
