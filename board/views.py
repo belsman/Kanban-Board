@@ -22,7 +22,7 @@ class CustomAuthToken(ObtainAuthToken):
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
         return Response({
-            'user_id': user.pk,
+            'id': user.pk,
             'username': user.username,
             'token': token.key,
         })
@@ -33,7 +33,7 @@ class ObtainAuthUser(APIView):
         data = {}
         user = request.user
         if user.is_authenticated:
-            data['user_id'] = user.id
+            data['id'] = user.id
             data['username'] = user.username
             if request.auth:
                 data['token'] = request.auth.key
