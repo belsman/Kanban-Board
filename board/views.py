@@ -1,12 +1,17 @@
+from django.contrib.auth import get_user_model
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework import mixins
+from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from board.models import Board, List, Card
 from board.permissions import IsBoardCreator
-from board.serializers import BoardSerializer, ListSerializer, CardSerializer
+from board.serializers import BoardSerializer, ListSerializer, CardSerializer, UserSerializer
+
+User = get_user_model()
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -34,6 +39,15 @@ class ObtainAuthUser(APIView):
                 data['token'] = request.auth.key
         return Response(data)
         
+
+class UserCreation(mixins.CreateModelMixin,
+                generics.GenericAPIView):
+    #queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
 
 class BoardViewSet(viewsets.ModelViewSet):
     queryset = Board.objects.all()
