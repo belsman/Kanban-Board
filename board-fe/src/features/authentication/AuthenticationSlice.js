@@ -32,6 +32,16 @@ export const login = createAsyncThunk(
   }
 );
 
+export const register = createAsyncThunk(
+  'auth/Register',
+  async (credentials) => {
+    const response = await axios.post("http://localhost:8000/register/", credentials);
+    const data = await response.data;
+    localStorage.setItem("kanban-board-by-bello", data.token);
+    return data;
+  }
+);
+
 export const logout = createAsyncThunk(
   'auth/logOut',
   async () => localStorage.removeItem("kanban-board-by-bello")

@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { register } from './AuthenticationSlice';
 
 function Register({ setToggle }) {
-
     const [ username, setUsername ] = useState("");
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ confirmPassword, setConfirmPassword ] = useState("");
+
+    const dispatch = useDispatch();
+
+    const handleSubmit = e => {
+      e.preventDefault();
+      dispatch(register({ username, email, password }));
+    };
 
     return (
     <>
@@ -13,7 +21,8 @@ function Register({ setToggle }) {
         <p>Need to login?</p>
         <button onClick={() => setToggle(true)}>Login</button>
       </div>
-      <form>
+      
+      <form onSubmit={handleSubmit}>
         <div>
           <input name="username" type="text"
             onChange={(e) => setUsername(e.target.value)}
