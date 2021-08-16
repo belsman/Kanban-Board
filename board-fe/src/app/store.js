@@ -3,6 +3,6 @@ import authenticationReducer from '../features/authentication/AuthenticationSlic
 
 export const store = configureStore({
   reducer: {
-    auth: authenticationReducer,
+    authUser: authenticationReducer,
   },
 });

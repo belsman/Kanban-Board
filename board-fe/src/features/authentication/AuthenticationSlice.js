@@ -1,11 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from "axios";
 
-const initialState = {
-  user: {},
-  fetchedUserStatus: 'idle',
-  error: null,
-};
+const initialState = {};
 
 axios.interceptors.request.use(async function (config) {
   const appToken = localStorage.getItem('kanban-board-by-bello');
@@ -52,22 +48,14 @@ export const authSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUser.pending, (state) => {
-        state.fetchedUserStatus = 'loading';
-      })
       .addCase(fetchUser.fulfilled, (state, action) => {
-        state.fetchedUserStatus = 'succeeded';
-        state.user = action.payload;
-      })
-      .addCase(fetchUser.rejected, (state, action) => {
-        state.fetchedUserStatus = 'failure';
-        state.error = action.error.message;;
+        return action.payload;
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload;
+        return action.payload;
       })
       .addCase(register.fulfilled, (state, action) => {
-        state.user = action.payload;
+        return action.payload;
       })
   },
 });

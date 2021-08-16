@@ -1,30 +1,41 @@
-import React, { useEffect } from 'react';
-import './App.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { unwrapResult } from '@reduxjs/toolkit';
 import { useSelector, useDispatch } from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import AuthPage from './features/authentication/AuthPage';
 import { fetchUser } from './features/authentication/AuthenticationSlice';
+import './App.css';
 
 function App() {
-  const user = useSelector(state => state.auth.user);
-  const fetchedUserStatus = useSelector(state => state.auth.fetchedUserStatus);
+  const [ fetchingUser, setFetchingUser ] = useState(true);
+  const [ error, setError ] = useState(null);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUser());
+    try {
+      const resultAction = dispatch(fetchUser());
+      unwrapResult(resultAction);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setFetchingUser(false);
+    }
   }, [dispatch]);
 
-  if (fetchedUserStatus === 'idle' || fetchedUserStatus === 'loading') {
-    return <div>Loading...</div>
-  } else if(fetchedUserStatus === 'failure') {
-    return <div>An error has occured!</div>
+  const authUser = useSelector(state => state.authUser);
+
+  if (fetchingUser) {
+    return <div>Loading...</div>;
   }
 
-  if (fetchedUserStatus === 'succeeded') {
-    if (!user.id) {
-      return <AuthPage />
-    }
+  if (error) {
+    return <div>An error has occured!</div>;
+  }
+
+  if (!authUser.id) {
+    return <AuthPage />;
   }
   
   return (
