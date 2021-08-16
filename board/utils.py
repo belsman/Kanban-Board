@@ -1,15 +1,17 @@
+from rest_framework.status import HTTP_200_OK, HTTP_401_UNAUTHORIZED
 from rest_framework.views import exception_handler
+from board.views import ObtainAuthUser
 
 def custom_exception_handler(exc, context):
-    # Call REST framework's default exception handler first,
-    # to get the standard error response.
-    print("What is in the 'context':")
-    print(context)
-    print("*************************")
+    is_auth_user_view = context['view'].get_view_name() == ObtainAuthUser().get_view_name()
     response = exception_handler(exc, context)
 
-    # Now add the HTTP status code to the response.
+    is_unauthorized = response.status_code == HTTP_401_UNAUTHORIZED
+    accessing_user_auth_view = is_unauthorized and is_auth_user_view
+    
     if response is not None:
-        response.data['status_code'] = response.status_code
+        if accessing_user_auth_view:
+            del response.data['detail']
+            response.status_code = HTTP_200_OK
 
     return response
