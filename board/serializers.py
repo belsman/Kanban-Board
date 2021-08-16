@@ -5,6 +5,9 @@ from board.models import Board, List, Card
 
 
 class UserSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(
+        allow_blank=True, label='Email address', write_only=True, max_length=254)
+    password = serializers.CharField(max_length=128, write_only=True)
     token = serializers.CharField(read_only=True, source='auth_token')
 
     class Meta:
