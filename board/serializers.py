@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from board.models import Board, List, Card
 
@@ -10,6 +11,13 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['id', 'username', 'email', 'password', 'token']
 
+    def create(self, validated_data):
+        user = User.objects.create(
+            email=validated_data['email'],
+            username=validated_data['username'],
+            password = make_password(validated_data['password'])
+        )
+        return user
 
 class CardSerializer(serializers.ModelSerializer):
     creator = serializers.ReadOnlyField(source='creator.username')
