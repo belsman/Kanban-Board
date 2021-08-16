@@ -1,8 +1,7 @@
 ## Improvements to make
 
-1. Make ```password``` field of the ```UserSerializer``` a ```writable_only```
-2. On the backend add registration view for registering a user
+1. Track the loading state with the UI and be sure to display an error if server is unreachable.
 
-3. Track the loading state with the UI and be sure to display an error if server is unreachable.
+2. Track the login and registration state so as to display it in the UI
 
-4. I want to catch authentication error when the path is [auth-user/]('') so that I can return an empty ```{}``` 
+3. Password validations: match password & confirmPassword before submission
