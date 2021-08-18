@@ -59,6 +59,9 @@ export const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         return action.payload;
       })
+      .addCase(logout.fulfilled, (state, action) => {
+        return {}
+      })
   },
 });
 
