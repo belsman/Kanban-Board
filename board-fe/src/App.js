@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { unwrapResult } from '@reduxjs/toolkit';
-import { useSelector, useDispatch } from 'react-redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Home from './components/Home';
+import { useDispatch } from 'react-redux';
 import Router from './router';
-import AuthPage from './features/authentication/AuthPage';
 import { fetchUser } from './features/authentication/AuthenticationSlice';
 import './App.css';
 
@@ -25,8 +22,6 @@ function App() {
     }
   }, [dispatch]);
 
-  const authUser = useSelector(state => state.authUser);
-
   if (fetchingUser) {
     return <div>Loading...</div>;
   }
@@ -35,19 +30,7 @@ function App() {
     return <div>An error has occured!</div>;
   }
 
-  if (!authUser.id) {
-    return <AuthPage />;
-  }
-  
-  return (
-    <div>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={Home} />
-        </Switch>
-      </BrowserRouter>
-    </div>
-  );
+  return <Router />
 }
 
 export default App;
