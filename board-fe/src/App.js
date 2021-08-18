@@ -3,6 +3,7 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
+import Router from './router';
 import AuthPage from './features/authentication/AuthPage';
 import { fetchUser } from './features/authentication/AuthenticationSlice';
 import './App.css';

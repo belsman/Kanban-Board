@@ -5,7 +5,9 @@ const initialState = {};
 
 axios.interceptors.request.use(async function (config) {
   const appToken = localStorage.getItem('kanban-board-by-bello');
-  config.headers["Authorization"] =  Boolean(appToken) && `Token ${appToken}`;
+  if (appToken) {
+    config.headers["Authorization"] = `Token ${appToken}`;
+  }
   return config;
 });
 
