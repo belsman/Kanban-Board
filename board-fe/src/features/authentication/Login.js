@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { unwrapResult } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import { login } from './AuthenticationSlice';
 
@@ -8,12 +9,26 @@ function Login({ setToggle }) {
 
   const [ username, setUsername ] = useState("");
   const [ password, setPassword ] = useState("");
+  const [ addRequestStatus, setAddRequestStatus ] = useState('idle');
 
-  const handleSubmit = e => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(login({ username, password }));
+    try {
+      setAddRequestStatus('pending');
+      const resultAction = await dispatch(login({ username, password }));
+      unwrapResult(resultAction);
+    } catch (err) {
+      console.error(err.message);
+    } finally {
+      setAddRequestStatus('idle');
+    }
   };
 
+  if (addRequestStatus === 'pending') {
+    return <h3>Loading....</h3>
+  }
+  
   return (
     <>
       <div>

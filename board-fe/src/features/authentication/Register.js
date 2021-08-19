@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { unwrapResult } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import { register } from './AuthenticationSlice';
 
@@ -7,14 +8,27 @@ function Register({ setToggle }) {
     const [ email, setEmail ] = useState("");
     const [ password, setPassword ] = useState("");
     const [ confirmPassword, setConfirmPassword ] = useState("");
+    const [ addRequestStatus, setAddRequestStatus ] = useState('idle');
 
     const dispatch = useDispatch();
 
-    const handleSubmit = e => {
+    const handleSubmit = async (e) => {
       e.preventDefault();
-      dispatch(register({ username, email, password }));
+      try {
+        setAddRequestStatus('pending');
+        const resultAction = await dispatch(register({ username, email, password }));
+        unwrapResult(resultAction);
+      } catch (err) {
+        console.error(err.message);
+      } finally {
+        setAddRequestStatus('idle');
+      }
     };
 
+    if (addRequestStatus === 'pending') {
+      return <h3>Loading....</h3>
+    }
+    
     return (
     <>
       <div>
