@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import { register } from './AuthenticationSlice';
+import { register } from './authenticationSlice';
 
 function Register({ setToggle }) {
     const [ username, setUsername ] = useState("");

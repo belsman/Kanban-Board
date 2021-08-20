@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import { login } from './AuthenticationSlice';
+import { login } from './authenticationSlice';
 
 function Login({ setToggle }) {
 

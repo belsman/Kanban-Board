@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import Router from './router';
-import { fetchUser } from './features/authentication/AuthenticationSlice';
+import { fetchUser } from './features/authentication/authenticationSlice';
 import './App.css';
 
 function App() {
