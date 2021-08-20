@@ -21,7 +21,7 @@ export const fetchBoards = createAsyncThunk("boards/fetchBoard", async () => {
 //   }
 // );
 
-const postsSlice = createSlice({
+const boardsSlice = createSlice({
   name: 'boards',
   initialState,
   reducers: {},
