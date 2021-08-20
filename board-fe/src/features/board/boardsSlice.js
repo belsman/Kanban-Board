@@ -31,7 +31,7 @@ const boardsSlice = createSlice({
     },
     [fetchBoards.fulfilled]: (state, action) => {
       state.status = 'succeeded';
-      state.posts = state.data.concat(action.payload);
+      state.data = state.data.concat(action.payload);
     },
     [fetchBoards.rejected]: (state, action) => {
       state.status = 'failed';
