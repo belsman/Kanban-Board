@@ -12,15 +12,19 @@ function Login({ setToggle }) {
   const [ addRequestStatus, setAddRequestStatus ] = useState('idle');
 
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     try {
       setAddRequestStatus('pending');
-      const resultAction = await dispatch(login({ username, password }));
+      const resultAction = dispatch(login({ username, password }));
       unwrapResult(resultAction);
     } catch (err) {
       console.error(err.message);
     } finally {
+      setAddRequestStatus('idle');
+    }
+    
+    return () => {
       setAddRequestStatus('idle');
     }
   };

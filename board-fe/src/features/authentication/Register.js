@@ -12,15 +12,18 @@ function Register({ setToggle }) {
 
     const dispatch = useDispatch();
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = e => {
       e.preventDefault();
       try {
         setAddRequestStatus('pending');
-        const resultAction = await dispatch(register({ username, email, password }));
+        const resultAction = dispatch(register({ username, email, password }));
         unwrapResult(resultAction);
       } catch (err) {
         console.error(err.message);
       } finally {
+        setAddRequestStatus('idle');
+      }
+      return () => {
         setAddRequestStatus('idle');
       }
     };
