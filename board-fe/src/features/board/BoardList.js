@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchBoards } from './boardsSlice';
 
 function BoardList() {
   const dispatch = useDispatch();
