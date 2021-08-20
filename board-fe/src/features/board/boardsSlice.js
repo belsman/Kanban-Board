@@ -7,7 +7,7 @@ const initialState = {
   error: null
 };
 
-export const fetchPosts = createAsyncThunk("boards/fetchBoard", async () => {
+export const fetchBoards = createAsyncThunk("boards/fetchBoard", async () => {
     const response = await axios.get("http://localhost:8000/boards/");
     const data = await response.data;
     return data;
@@ -26,20 +26,20 @@ const postsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [fetchPosts.pending]: (state) => {
+    [fetchBoards.pending]: (state) => {
       state.status = 'loading';
     },
-    [fetchPosts.fulfilled]: (state, action) => {
+    [fetchBoards.fulfilled]: (state, action) => {
       state.status = 'succeeded';
-      state.posts = state.posts.concat(action.payload);
+      state.posts = state.data.concat(action.payload);
     },
-    [fetchPosts.rejected]: (state, action) => {
+    [fetchBoards.rejected]: (state, action) => {
       state.status = 'failed';
       state.error = action.error.message;
     },
-    [addNewPost.fulfilled]: (state, action) => {
-      state.posts.push(action.payload);
-    }
+    // [addNewPost.fulfilled]: (state, action) => {
+    //   state.posts.push(action.payload);
+    // }
 
   }
 });
