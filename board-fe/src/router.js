@@ -15,18 +15,13 @@ function Router() {
   }
       
   return (
-    <div>
-      <nav>
-        <Logout />
-      </nav>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={BoardList} />
-          <Route exact path="/boards/:boardId" component={Board} />
-          <Route exact path="/boards" component={BoardList} />
-         </Switch>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={BoardList} />
+        <Route exact path="/boards/:boardId" component={Board} />
+        <Route exact path="/boards" component={BoardList} />
+        </Switch>
+    </BrowserRouter>
   );
 }
 
