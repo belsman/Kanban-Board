@@ -7,8 +7,6 @@ function BoardList() {
   const dispatch = useDispatch();
 
   const boards = useSelector(state => state.boards.data);
-  console.log("boards*****");
-  console.log(boards);
   const boardStatus = useSelector(state => state.boards.status);
   const error = useSelector(state => state.boards.error);
 
@@ -26,7 +24,7 @@ function BoardList() {
     const renderedBoards = boards
       .map(board => (
         <li key={board.id} className="board">
-          <Link to={`boards/${board.id}`}>{board.name}</Link>
+          <Link to={`/boards/${board.id}`}>{board.name}</Link>
         </li>));
     content = <ul>{renderedBoards}</ul>;
   } else if (boardStatus === 'failure') {
