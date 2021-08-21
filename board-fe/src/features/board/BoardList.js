@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchBoards } from './boardsSlice';
 
 function BoardList() {
@@ -23,7 +24,10 @@ function BoardList() {
     content = <div className="loader">Loading....</div>;
   } else if (boardStatus === 'succeeded') {
     const renderedBoards = boards
-      .map(board => <li key={board.id} className="board">{board.name}</li>);
+      .map(board => (
+        <li key={board.id} className="board">
+          <Link to={`boards/${board.id}`}>{board.name}</Link>
+        </li>));
     content = <ul>{renderedBoards}</ul>;
   } else if (boardStatus === 'failure') {
     content = <div>{error}</div>
