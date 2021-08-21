@@ -5,6 +5,7 @@ import AuthPage from './features/authentication/AuthPage';
 // import Home from './components/Home';
 import Logout from "./features/authentication/Logout";
 import BoardList from "./features/board/BoardList";
+import Board from "./features/board/Board";
 
 function Router() {
   const authUserId = useSelector(state => state.authUser.id);
@@ -21,6 +22,7 @@ function Router() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={BoardList} />
+          <Route exact path="/boards/:id" component={Board} />
          </Switch>
       </BrowserRouter>
     </div>
