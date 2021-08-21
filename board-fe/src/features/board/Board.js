@@ -1,9 +1,10 @@
 import React from 'react';
 
-function Board() {
-  
+function Board({ match }) {
+  const { boardId } = match.params;
+
   return (
-    <h1>Current board!: Welcome to your board!</h1>
+    <div>Current board! with boardId: {boardId}</div>
   );
 }
 

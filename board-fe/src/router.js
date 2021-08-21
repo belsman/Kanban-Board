@@ -22,7 +22,7 @@ function Router() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={BoardList} />
-          <Route exact path="/boards/:id" component={Board} />
+          <Route exact path="/boards/:boardId" component={Board} />
          </Switch>
       </BrowserRouter>
     </div>
