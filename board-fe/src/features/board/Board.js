@@ -17,14 +17,11 @@ function Board({ match }) {
   }
 
   const lists = board.lists;
-  const renderedLists = lists.map(list => <List key={list.id} cards={list.cards} />);
-
-  console.log("Why are we not showing!");
-  console.log(renderedLists);
+  const renderedLists = lists.map(list => <List key={list.id} listName={list.name} cards={list.cards} />);
 
   return (
     <div>
-      <div className="lists" style={{ display: 'flex' }}>
+      <div className="lists">
         {renderedLists}
       </div>
     </div>

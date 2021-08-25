@@ -1,11 +1,20 @@
 import React from 'react';
 
-function List({ cards }) {
+function List({ listName, cards }) {
   
-  const renderedCards = cards.map(card => <div key={card.id} className="card">{card.title}</div>);
+  const renderedCards = cards.map(card => (
+    <div class="card">
+      {card.title}
+    </div>
+  ));
 
   return (
-    <div className="list" style={{ border: '1px solid red' }}>{renderedCards}</div>
+    <div class="list">
+      <header class="list-header">{listName}</header>
+      <div className="cards">
+        {renderedCards}
+      </div>
+    </div>
   );
 }
 
