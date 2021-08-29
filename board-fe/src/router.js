@@ -20,7 +20,7 @@ function Router() {
         <Route exact path="/" component={BoardList} />
         <Route exact path="/boards/:boardId" component={Board} />
         <Route exact path="/boards" component={BoardList} />
-        </Switch>
+      </Switch>
     </BrowserRouter>
   );
 }
