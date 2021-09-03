@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Modal({ show, onClose }) {
+function Modal({ show, onClose, title, children }) {
 
   if (!show) {
     return null;
@@ -9,12 +9,15 @@ function Modal({ show, onClose }) {
   return (
     <div className="modal" onClick={onClose}>
       <div className="modal-content" onClick={e => e.stopPropagation()}>
+        <div className="modal-header">
+          <h4>{title}</h4>
+        </div>
         <div className="modal-body">
-          <h3>You are viewing the contents of your card</h3>
+          {children}
         </div>
         <div className="modal-footer">
-        <button onClick={onClose} className="button">close</button>
-      </div>
+          <button onClick={onClose} className="button">close</button>
+        </div>
       </div>
     </div>
   )

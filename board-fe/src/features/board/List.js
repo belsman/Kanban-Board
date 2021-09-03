@@ -3,7 +3,7 @@ import CardExcerpt from './CardExcerpt';
 
 function List({ listName, cards }) {
   
-  const renderedCards = cards.map(card => <CardExcerpt title={card.title} cardId={card.id} />);
+  const renderedCards = cards.map(card => <CardExcerpt card={card} />);
 
   return (
     <div class="list">

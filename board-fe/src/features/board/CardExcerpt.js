@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import Modal from "../../components/modal/modal";
+import CardDetail from "./CardDetail";
 
-function CardExcerpt({ cardId, title }) {
+function CardExcerpt({card }) {
   const [ showCardDetail, setShowCardDetail ] = useState(false);
 
   return (
     <>
       <div class="card" onClick={() => setShowCardDetail(true)}>
-        {title}
+        {card.title}
       </div>
-      <Modal show={showCardDetail} onClose={() => setShowCardDetail(false)} />
+      <CardDetail card={card} show={showCardDetail} onClose={() => setShowCardDetail(false)} />
     </>
   );
 }
