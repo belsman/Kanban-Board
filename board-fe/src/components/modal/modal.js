@@ -1,6 +1,10 @@
 import React from 'react';
 
-function Modal() {
+function Modal({ show }) {
+
+  if (!show) {
+    return null;
+  }
 
   return (
     <div className="modal">
