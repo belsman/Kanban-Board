@@ -9,7 +9,7 @@ function CardExcerpt({ cardId, title }) {
       <div class="card" onClick={() => setShowCardDetail(true)}>
         {title}
       </div>
-      <Modal show={showCardDetail} />
+      <Modal show={showCardDetail} onClose={() => setShowCardDetail(false)} />
     </>
   );
 }

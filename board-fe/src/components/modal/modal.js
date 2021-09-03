@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Modal({ show }) {
+function Modal({ show, onClose }) {
 
   if (!show) {
     return null;
@@ -13,7 +13,7 @@ function Modal({ show }) {
           <h3>You are viewing the contents of your card</h3>
         </div>
         <div className="modal-footer">
-        <button className="button">close</button>
+        <button onClick={onClose} className="button">close</button>
       </div>
       </div>
     </div>
