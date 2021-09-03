@@ -7,8 +7,8 @@ function Modal({ show, onClose }) {
   }
 
   return (
-    <div className="modal">
-      <div className="modal-content">
+    <div className="modal" onClick={onClose}>
+      <div className="modal-content" onClick={e => e.stopPropagation()}>
         <div className="modal-body">
           <h3>You are viewing the contents of your card</h3>
         </div>
