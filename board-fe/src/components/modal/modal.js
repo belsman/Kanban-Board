@@ -5,7 +5,12 @@ function Modal() {
   return (
     <div className="modal">
       <div className="modal-content">
-        <h1>You are viewing the contents of your card</h1>
+        <div className="modal-body">
+          <h3>You are viewing the contents of your card</h3>
+        </div>
+        <div className="modal-footer">
+        <button className="button">close</button>
+      </div>
       </div>
     </div>
   )
