@@ -7,7 +7,7 @@ function AddEntity() {
   // usually will display a form for us.
 
   return (
-    <div class="add-entity-dropdown">
+    <div class="dropdown">
       <button class="dropbtn">Add</button>
       <div id="myDropdown" class="dropdown-content">
         <a href="#">Link 1</a>
