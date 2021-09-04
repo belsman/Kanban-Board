@@ -1,20 +1,9 @@
 import React from "react";
-import Modal from "../../components/modal/modal";
 
-function CardDetail({ card, show, onClose }) {
-
-  const { title, description } = card;
-
-  const displayContent = (
-    <div>
-      <p>{description}</p>
-    </div>
-  );
+function CardDetail({ card }) {
 
   return (
-    <Modal title={title} show={show} onClose={onClose} >
-      {displayContent}
-    </Modal>
+    <div></div>
   )
 }
 

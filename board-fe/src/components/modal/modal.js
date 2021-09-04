@@ -1,8 +1,9 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { CSSTransition } from 'react-transition-group';
 
 function Modal({ show, onClose, title, children }) {
-  return (
+  return ReactDOM.createPortal(
     <CSSTransition
       in={show}
       unmountOnExit
@@ -21,7 +22,8 @@ function Modal({ show, onClose, title, children }) {
           </div>
         </div>
       </div>
-    </CSSTransition>
+    </CSSTransition>,
+    document.getElementById('root')
   )
 }
 
