@@ -1,4 +1,5 @@
 import React from "react";
+import AddEntity from "./AddEntity";
 
 function Nav() {
 
@@ -12,7 +13,7 @@ function Nav() {
         </select>
       </div>
       <div className="righ-nav">
-        <button>Add</button>
+        <AddEntity />
       </div>
     </nav>
   )
