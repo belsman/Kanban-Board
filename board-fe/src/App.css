@@ -80,3 +80,19 @@ body {
 .modal-body {
   padding: 1rem;
 }
+
+/* == Board Navigation == */
+.board-nav {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+}
+
+.board-selector {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 0.5rem;
+  font-weight: 600;
+}

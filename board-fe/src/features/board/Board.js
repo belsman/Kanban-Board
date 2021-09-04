@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import Nav from '../../components/Nav';
 import List from './List';
 
 function Board({ match }) {
@@ -20,11 +21,14 @@ function Board({ match }) {
   const renderedLists = lists.map(list => <List key={list.id} listName={list.name} cards={list.cards} />);
 
   return (
-    <div>
-      <div className="lists">
-        {renderedLists}
+    <>
+      <Nav />
+      <div>
+        <div className="lists">
+          {renderedLists}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
