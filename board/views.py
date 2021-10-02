@@ -18,12 +18,16 @@ class CustomAuthToken(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data,
                                            context={'request': request})
+
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
-        token, created = Token.objects.get_or_create(user=user)
+
+        token, _ = Token.objects.get_or_create(user=user)
+
         return Response({
             'id': user.pk,
-            'username': user.username,
+            'email': user.email,
+            'full_name': user.full_name,
             'token': token.key,
         })
 
@@ -34,7 +38,8 @@ class ObtainAuthUser(APIView):
         user = request.user
         if user.is_authenticated:
             data['id'] = user.id
-            data['username'] = user.username
+            data['email'] = user.email
+            data['full_name'] = user.full_name
             if request.auth:
                 data['token'] = request.auth.key
         return Response(data)

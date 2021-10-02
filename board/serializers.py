@@ -7,19 +7,17 @@ User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
-    email = serializers.EmailField(
-        allow_blank=True, label='Email address', write_only=True, max_length=254)
     password = serializers.CharField(max_length=128, write_only=True)
     token = serializers.CharField(read_only=True, source='auth_token')
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password', 'token']
+        fields = ['id', 'email', 'full_name', 'password', 'token']
 
     def create(self, validated_data):
         user = User.objects.create(
             email=validated_data['email'],
-            username=validated_data['username'],
+            full_name=validated_data['full_name'],
             password = make_password(validated_data['password'])
         )
         return user
