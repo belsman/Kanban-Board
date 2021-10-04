@@ -3,6 +3,7 @@ from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 from board.models import Board, List, Card
 
+
 User = get_user_model()
 
 
@@ -23,12 +24,13 @@ class UserSerializer(serializers.ModelSerializer):
         )
         return user
 
+
 class CardSerializer(serializers.ModelSerializer):
     creator = serializers.ReadOnlyField(source='creator.username')
 
     class Meta:
         model = Card
-        fields = ['id', 'title', 'description', 'assigned', 'board', 'list', 'order', 'started', 'completed', 'creator']
+        fields = ['id', 'title', 'description', 'assigned', 'board', 'list', 'started', 'completed', 'creator']
 
 
 class ListSerializer(serializers.ModelSerializer):
@@ -37,7 +39,7 @@ class ListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = List
-        fields = ['id', 'name', 'order', 'creator', 'board',  'cards']
+        fields = ['id', 'name', 'creator', 'board', 'cards']
 
 
 class BoardSerializer(serializers.ModelSerializer):
@@ -50,6 +52,6 @@ class BoardSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         board = Board.objects.create(**validated_data)
-        for list_name in ['to-do', 'doing', 'done']:
+        for list_name in ['to do', 'doing', 'done']:
             List.objects.create(board=board, name=list_name, creator=board.creator)
         return board

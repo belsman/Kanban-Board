@@ -66,7 +66,6 @@ class List(models.Model):
     """Current state of the card. (Backlog, To-Do, In-Prgress, Done) etc.""" 
 
     name = models.CharField(max_length=100)
-    order = models.SmallIntegerField(default=0)
     board = models.ForeignKey(Board, related_name='lists', on_delete=models.CASCADE)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, related_name='created_lists', on_delete=models.CASCADE)
 
@@ -81,7 +80,6 @@ class Card(models.Model):
     description = models.TextField(blank=True, default='')
     board = models.ForeignKey(Board, related_name='cards', on_delete=models.CASCADE)
     list = models.ForeignKey(List, related_name='cards', blank=True, null=True, on_delete=models.CASCADE)
-    order = models.SmallIntegerField(default=0)
     started = models.DateTimeField(blank=True, null=True)
     completed = models.DateTimeField(blank=True, null=True)
     assigned = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='assigned_cards', null=True, blank=True, on_delete=models.CASCADE)
