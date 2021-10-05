@@ -39,7 +39,7 @@ class ListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = List
-        fields = ['id', 'name', 'creator', 'board', 'cards']
+        fields = ['id', 'name', 'creator', 'board', 'cards', 'cards_order']
 
 
 class BoardSerializer(serializers.ModelSerializer):
@@ -48,10 +48,17 @@ class BoardSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Board
-        fields = ['id', 'name', 'description', 'creator', 'lists']
+        fields = ['id', 'name', 'description', 'creator', 'lists', 'lists_order']
 
     def create(self, validated_data):
         board = Board.objects.create(**validated_data)
+        new_lists_order = []
+
         for list_name in ['to do', 'doing', 'done']:
-            List.objects.create(board=board, name=list_name, creator=board.creator)
+            list_data = List.objects.create(board=board, name=list_name, creator=board.creator)
+            new_lists_order.append(list_data.id)
+            
+        board.lists_order = new_lists_order
+        board.save()
+
         return board

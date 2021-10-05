@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
 from django.db.models.signals import post_save
@@ -56,7 +57,13 @@ class Board(models.Model):
 
     name = models.CharField(max_length=100)
     description = models.TextField(blank='', default='')
-    creator = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, related_name='created_boards', on_delete=models.CASCADE)
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        null=True,
+        related_name='created_boards',
+        on_delete=models.CASCADE)
+    lists_order = ArrayField(
+        models.IntegerField(), default=list)
 
     def __str__(self):
         return self.name
@@ -67,7 +74,12 @@ class List(models.Model):
 
     name = models.CharField(max_length=100)
     board = models.ForeignKey(Board, related_name='lists', on_delete=models.CASCADE)
-    creator = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, related_name='created_lists', on_delete=models.CASCADE)
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        null=True, related_name='created_lists',
+        on_delete=models.CASCADE)
+    cards_order = ArrayField(
+        models.IntegerField(), default=list)
 
     def __str__(self):
         return self.name
