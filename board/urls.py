@@ -6,7 +6,7 @@ from board.views import BoardViewSet, ListViewSet, CardViewSet, ObtainAuthUser, 
 router = DefaultRouter()
 router.register(r'boards', BoardViewSet)
 router.register(r'lists', ListViewSet)
-router.register(r'tasks', CardViewSet)
+router.register(r'cards', CardViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

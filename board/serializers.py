@@ -31,6 +31,13 @@ class CardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Card
         fields = ['id', 'title', 'description', 'assigned', 'board', 'list', 'started', 'completed', 'creator']
+    
+    def create(self, validated_data):
+        card = Card.objects.create(**validated_data)
+        list = card.list
+        list.cards_order.append(card.id)
+        list.save()
+        return card
 
 
 class ListSerializer(serializers.ModelSerializer):
@@ -40,6 +47,8 @@ class ListSerializer(serializers.ModelSerializer):
     class Meta:
         model = List
         fields = ['id', 'name', 'creator', 'board', 'cards', 'cards_order']
+
+    # override create to add the listId to the lists_order of the associated board
 
 
 class BoardSerializer(serializers.ModelSerializer):
@@ -57,7 +66,7 @@ class BoardSerializer(serializers.ModelSerializer):
         for list_name in ['to do', 'doing', 'done']:
             list_data = List.objects.create(board=board, name=list_name, creator=board.creator)
             new_lists_order.append(list_data.id)
-            
+
         board.lists_order = new_lists_order
         board.save()
 
