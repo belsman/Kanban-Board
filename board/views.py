@@ -82,3 +82,10 @@ class CardViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(creator=self.request.user)
 
+    def destroy(self, request, *args, **kwargs):
+       card = self.get_object()
+       list = card.list
+       list.cards_order.remove(card.id)
+       list.save()
+       return super(CardViewSet, self).destroy(request, *args, **kwargs)
+
