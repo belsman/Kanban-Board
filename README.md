@@ -25,9 +25,6 @@
 
 | Methods        | PATH           | Description  |
 | :------------- |:-------------| -----:|
-| POST      | /register/ | Registers a new user to obtain token |
-| POST      | /login/ | Login in an existing user to obtain token |
-| GET      | /auth-user/ | Return current user |
 | GET      | /boards/ | Get the list of boards |
 | POST      | /boards/ | Create a new board |
 | GET      | /boards/```<id>```/ | Get a single board with the given Id|
