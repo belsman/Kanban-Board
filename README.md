@@ -11,7 +11,7 @@
 
 ## API EndPoints
 
-```ENDPOINT``` = [http://example.com](http://example.com)
+```ROOT_URL``` = [https://murmuring-brushlands-24573.herokuapp.com/](http://example.com)
 ### Endpoints for Authentication
 
 | Methods        | PATH           | Description  |
