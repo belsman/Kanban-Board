@@ -140,7 +140,7 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
-    'https://kanban-board-by-belsman.netlify.app/'
+    'https://kanban-board-by-belsman.netlify.app'
 ]
 
 import django_heroku
